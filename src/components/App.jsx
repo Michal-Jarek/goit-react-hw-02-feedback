@@ -1,3 +1,7 @@
+import { Counter } from "./testowe/testowe";
+import { Toggle } from './testowe/testowe2';
+import { Feedback } from "./Feedback";
+
 export const App = () => {
   return (
     <div
@@ -7,10 +11,13 @@ export const App = () => {
         justifyContent: 'center',
         alignItems: 'center',
         fontSize: 40,
-        color: '#010101'
+        color: '#010101',
       }}
     >
-      React homework template
+      <Counter step={5} />
+      <Toggle />
+      <Feedback />
+      
     </div>
   );
 };
