@@ -19,28 +19,6 @@ class Feedback extends Component {
     this.setState(prevState => ({ [name]: prevState[name] + 1 }));
   };
 
-  // handleIncrement = whichButton => {
-  //   switch (whichButton) {
-  //     case 'good':
-  //       this.setState(prevState => ({
-  //         good: prevState.good + 1,
-  //       }));
-  //       break;
-  //     case 'neutral':
-  //       this.setState(prevState => ({
-  //         neutral: prevState.neutral + 1,
-  //       }));
-  //       break;
-  //     case 'bad':
-  //       this.setState(prevState => ({
-  //         bad: prevState.bad + 1,
-  //       }));
-  //       break;
-  //     default:
-  //       return 0;
-  //   }
-  // };
-
   render() {
     return (
       <div>
