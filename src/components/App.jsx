@@ -14,8 +14,8 @@ export const App = () => {
         color: '#010101',
       }}
     >
-      <Counter step={5} />
-      <Toggle />
+      {/* <Counter step={5} />
+      <Toggle /> */}
       <Feedback />
       
     </div>
