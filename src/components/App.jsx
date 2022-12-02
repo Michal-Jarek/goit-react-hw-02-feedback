@@ -1,7 +1,10 @@
 import { Component } from 'react';
 import Statistics from './Statistics';
+import FeedbackOptions from './FeedbackOptions';
+import Section from './Section';
 
 export class App extends Component {
+
   static defaultProps = {
     good: 0,
     neutral: 0,
@@ -14,6 +17,8 @@ export class App extends Component {
     bad: this.props.bad,
   };
 
+// ************************** Methods ********************************
+
   handleIncrement = evt => {
     const { name } = evt.target;
     this.setState(prevState => ({
@@ -24,39 +29,48 @@ export class App extends Component {
   countTotalFeedback = (option1, option2, option3) => {
     return option1 + option2 + option3;
   };
+  
   countPositiveFeedbackPercentage = (positive, total) => {
     return total > 0
       ? `${Number(Math.round((positive / total) * 100 + 'e+2') + 'e-2')}%`
       : 0;
   };
+
+
   render() {
     const { good, neutral, bad } = this.state;
+    const keys = Object.keys(this.state);
+
     let total = this.countTotalFeedback(good, neutral, bad);
     let percentage = this.countPositiveFeedbackPercentage(good, total);
+
     return (
       <div
         style={{
           height: '100vh',
           display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
+          flexDirection: 'column',
+          justifyContent: 'flex-start',
+          alignItems: 'flex-start',
           fontSize: 40,
           color: '#010101',
         }}
       >
-        <div>
-          <h1>Please leave feedback</h1>
-          <button type="button" name="good" onClick={this.handleIncrement}>
-            Good
-          </button>
-          <button type="button" name="neutral" onClick={this.handleIncrement}>
-            Neutral
-          </button>
-          <button type="button" name="bad" onClick={this.handleIncrement}>
-            Bad
-          </button>
-        </div>
-        <Statistics good={good} neutral={neutral} bad={bad} total={total} positivePercentage={percentage} />
+        <Section title="Please leave feedback">
+          <FeedbackOptions
+            options={keys}
+            onLeaveFeedback={this.handleIncrement}
+          />
+        </Section>
+        <Section title="Statistics">
+          <Statistics
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            total={total}
+            positivePercentage={percentage}
+          />
+        </Section>
       </div>
     );
   }
