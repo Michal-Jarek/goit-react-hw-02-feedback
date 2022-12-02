@@ -16,10 +16,24 @@ class Feedback extends Component {
 
   handleIncrement = evt => {
     const { name } = evt.target;
-    this.setState(prevState => ({ [name]: prevState[name] + 1 }));
+    this.setState(prevState => ({
+      [name]: prevState[name] + 1,
+    }));
+  };
+
+  countTotalFeedback = (option1, option2, option3) => {
+    return option1 + option2 + option3;
+  };
+  countPositiveFeedbackPercentage = (positive, total) => {
+    return total > 0
+      ? `${Number(Math.round((positive / total) * 100 + 'e+2') + 'e-2')}%`
+      : 0;
   };
 
   render() {
+    const { good, neutral, bad } = this.state;
+    let total = this.countTotalFeedback(good, neutral, bad);
+    let percentage = this.countPositiveFeedbackPercentage(good, total);
     return (
       <div>
         <div>
@@ -36,9 +50,11 @@ class Feedback extends Component {
         </div>
         <div>
           <h1>Statistics</h1>
-          <span>Good: {this.state.good}</span>
-          <span>Neutral: {this.state.neutral}</span>
-          <span>Bad: {this.state.bad}</span>
+          <span>Good: {good}</span>
+          <span>Neutral: {neutral}</span>
+          <span>Bad: {bad}</span>
+          <span>Total: {total}</span>
+          <span>Positive feedback: {percentage}</span>
         </div>
       </div>
     );
